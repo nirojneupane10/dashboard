@@ -1,10 +1,24 @@
 import { Box } from "@mui/material";
-import SidebarItems from "./SidebarItems";
+import SidebarItems, { SidebarItemProps } from "./SidebarItems";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 
 const Sidebar = () => {
+  const sidebarItem: SidebarItemProps[] = [
+    {
+      name: "Home",
+      icon: <HomeIcon />,
+    },
+    {
+      name: "About",
+      icon: <InfoIcon />,
+    },
+    {
+      name: "Product",
+      icon: <Inventory2Icon />,
+    },
+  ];
   return (
     <Box
       bgcolor="primary.main"
@@ -22,9 +36,10 @@ const Sidebar = () => {
       bottom={0}
       left={0}
     >
-      <SidebarItems name="Home" icon={<HomeIcon />} />
-      <SidebarItems name="About" icon={<InfoIcon />} />
-      <SidebarItems name="Product" icon={<Inventory2Icon />} />
+      {sidebarItem &&
+        sidebarItem.map((info, index) => (
+          <SidebarItems name={info.name} icon={info.icon} key={index} />
+        ))}
     </Box>
   );
 };

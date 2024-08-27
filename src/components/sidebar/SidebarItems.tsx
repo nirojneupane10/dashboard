@@ -1,6 +1,6 @@
 import { Box, Icon, Typography } from "@mui/material";
 
-type SidebarItemProps = {
+export type SidebarItemProps = {
   name: string;
   icon: JSX.Element;
 };
