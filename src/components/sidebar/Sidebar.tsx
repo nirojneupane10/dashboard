@@ -1,46 +1,60 @@
-import { Box } from "@mui/material";
-import SidebarItems, { SidebarItemProps } from "./SidebarItems";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 
 const Sidebar = () => {
-  const sidebarItem: SidebarItemProps[] = [
-    {
-      name: "Home",
-      icon: <HomeIcon />,
-    },
-    {
-      name: "About",
-      icon: <InfoIcon />,
-    },
-    {
-      name: "Product",
-      icon: <Inventory2Icon />,
-    },
+  const sidebarItems = [
+    { name: "Home", icon: <HomeIcon />, link: "/" },
+    { name: "About", icon: <InfoIcon />, link: "/about" },
+    { name: "Product", icon: <Inventory2Icon />, link: "/product" },
   ];
+
   return (
-    <Box
-      bgcolor="primary.main"
-      width={150}
-      height="100vh"
-      color="white"
-      display="flex"
-      gap={2}
-      flexDirection="column"
-      pt={5}
-      justifyItems="center"
-      alignItems="center"
-      position="absolute"
-      top={0}
-      bottom={0}
-      left={0}
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: 240,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: 240,
+          backgroundColor: "primary.main",
+          color: "white",
+        },
+      }}
     >
-      {sidebarItem &&
-        sidebarItem.map((info, index) => (
-          <SidebarItems name={info.name} icon={info.icon} key={index} />
+      <List>
+        {sidebarItems.map((item, index) => (
+          <ListItem
+            key={index}
+            component={NavLink}
+            to={item.link}
+            sx={{
+              color: "white",
+              "&.active": {
+                color: "secondary.main",
+              },
+              "&:hover": {
+                color: "secondary.main",
+                cursor: "pointer",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ color: "inherit" }} aria-label={item.name}>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.name} />
+          </ListItem>
         ))}
-    </Box>
+      </List>
+    </Drawer>
   );
 };
 
