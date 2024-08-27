@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import SidebarLayout from "../components/layout/SidebarLayout";
 import LazyLoad from "../components/LazyLoad";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const HomePage = React.lazy(() => import("../pages/HomePage"));
 const AboutPage = React.lazy(() => import("../pages/AboutPage"));
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
         <Route index element={LazyLoad(HomePage)} />
         <Route path="/about" element={LazyLoad(AboutPage)} />
         <Route path="/product" element={LazyLoad(Product)} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Route>
   )
