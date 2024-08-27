@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import SidebarLayout from "../components/layout/SidebarLayout";
+import LazyLoad from "../components/LazyLoad";
 
 const HomePage = React.lazy(() => import("../pages/HomePage"));
 const AboutPage = React.lazy(() => import("../pages/AboutPage"));
@@ -14,30 +15,11 @@ const Product = React.lazy(() => import("../pages/product/Product"));
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<SidebarLayout />}>
-      <Route
-        index
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <HomePage />
-          </Suspense>
-        }
-      />
-      <Route
-        path="/about"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <AboutPage />
-          </Suspense>
-        }
-      />
-      <Route
-        path="/product"
-        element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Product />
-          </Suspense>
-        }
-      />
+      <Route path="/" element={<SidebarLayout />}>
+        <Route index element={LazyLoad(HomePage)} />
+        <Route path="/about" element={LazyLoad(AboutPage)} />
+        <Route path="/product" element={LazyLoad(Product)} />
+      </Route>
     </Route>
   )
 );

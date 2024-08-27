@@ -10,13 +10,13 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 
-const Sidebar = () => {
-  const sidebarItems = [
-    { name: "Home", icon: <HomeIcon />, link: "/" },
-    { name: "About", icon: <InfoIcon />, link: "/about" },
-    { name: "Product", icon: <Inventory2Icon />, link: "/product" },
-  ];
+const sidebarItems = [
+  { name: "Home", icon: <HomeIcon />, link: "/" },
+  { name: "About", icon: <InfoIcon />, link: "/about" },
+  { name: "Product", icon: <Inventory2Icon />, link: "/product" },
+];
 
+const Sidebar = () => {
   return (
     <Drawer
       variant="permanent"
