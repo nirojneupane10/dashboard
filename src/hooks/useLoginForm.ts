@@ -17,15 +17,16 @@ export const useLoginForm = () => {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
-  const { setIsAuthenticated } = useAuth();
+
+  const { login } = useAuth();
+
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: userLogin,
     onSuccess: (data) => {
-      localStorage.setItem("accessToken", data.token);
+      login(data.accessToken);
       queryClient.invalidateQueries({ queryKey: ["userlogin"] });
       toast.success("User loggedin successfully!");
-      setIsAuthenticated(true);
       navigate("/");
     },
     onError: (error: AxiosError<{ message: string }>) => {

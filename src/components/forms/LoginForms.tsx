@@ -2,13 +2,10 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useLoginForm } from "../../hooks/useLoginForm";
 
 import Loader from "../loader/Loader";
-import { useAuth } from "../../providers/Authprovider/AuthContext";
 
 const LoginForms = () => {
   const { register, handleSubmit, errors, onSubmit, mutation } = useLoginForm();
-  const { isAuthenticated } = useAuth();
 
-  console.log(isAuthenticated);
   return (
     <Box
       display="flex"

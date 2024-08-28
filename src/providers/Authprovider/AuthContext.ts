@@ -1,9 +1,8 @@
-import { createContext, useContext, Dispatch, SetStateAction } from "react";
+import { createContext, useContext } from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
-  login: () => void;
+  login: (token: string) => void;
   logout: () => void;
 }
 

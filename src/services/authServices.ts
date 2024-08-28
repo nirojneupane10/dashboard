@@ -1,9 +1,9 @@
 import axios from "axios";
 import { LoginFormData } from "../types/loginFormTypes";
-const apiUrl = import.meta.env.VITE_REACT_API_URL;
+import config from "../config/config";
 
 export const userLogin = async (userData: LoginFormData) => {
-  const response = await axios.post(`${apiUrl}/user/login`, userData);
+  const response = await axios.post(`${config.apiUrl}/user/login`, userData);
 
   return response.data;
 };

@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useAuth } from "../../providers/Authprovider/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Logout = () => {
   const { logout } = useAuth();
@@ -8,6 +9,7 @@ const Logout = () => {
 
   const handleLogout = () => {
     logout();
+    toast.success("Successfully logout");
     navigate("/login");
   };
 
