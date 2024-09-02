@@ -1,43 +1,40 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormData } from "../types/loginFormTypes";
-import { loginSchema } from "../schames/loginSchemas";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../providers/Authprovider/AuthContext";
-import { userLogin } from "../api/userApi/userAPi";
-export const useLoginForm = () => {
+import { addProduct } from "../../../api/productApi/productApi";
+import { ProductFormData } from "../types/ProductTypes";
+import { productSchema } from "../schema/productSchema";
+
+export const useProductForm = () => {
   const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<ProductFormData>({
+    resolver: zodResolver(productSchema),
   });
-
-  const { login } = useAuth();
 
   const navigate = useNavigate();
   const mutation = useMutation({
-    mutationFn: userLogin,
+    mutationFn: addProduct,
     onSuccess: (data) => {
-      login(data.accessToken);
-      queryClient.invalidateQueries({ queryKey: ["userlogin"] });
-      toast.success("User loggedin successfully!");
-      navigate("/");
+      queryClient.invalidateQueries({ queryKey: ["product"] });
+      toast.success(data.message);
+      navigate("/product");
     },
     onError: (error: AxiosError<{ message: string }>) => {
       const errorMessage =
-        error.response?.data?.message || "Login failed. Please try again.";
+        error.response?.data?.message || "Adding product failed";
       toast.error(errorMessage);
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = (data: ProductFormData) => {
     mutation.mutate(data);
   };
 
