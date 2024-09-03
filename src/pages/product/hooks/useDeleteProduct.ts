@@ -3,8 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { deleteProduct } from "../../../api/productApi/productApi";
-
-const PRODUCT_QUERY_KEY = "product";
+import { queryKeys } from "../../../keys/keys";
 
 export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
@@ -12,7 +11,9 @@ export const useDeleteProduct = () => {
   const mutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [PRODUCT_QUERY_KEY] });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRODUCT_QUERY_KEY],
+      });
       toast.success(data.message);
     },
     onError: (error: AxiosError<{ message: string }>) => {

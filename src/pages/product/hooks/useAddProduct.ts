@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { addProduct } from "../../../api/productApi/productApi";
 import { ProductFormData } from "../types/ProductTypes";
 import { productSchema } from "../schema/productSchema";
-
-const PRODUCT_QUERY_KEY = "product";
+import { queryKeys } from "../../../keys/keys";
 
 export const useProductForm = () => {
   const queryClient = useQueryClient();
@@ -25,7 +24,9 @@ export const useProductForm = () => {
   const mutation = useMutation({
     mutationFn: addProduct,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [PRODUCT_QUERY_KEY] });
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.PRODUCT_QUERY_KEY],
+      });
       toast.success(data.message);
       navigate("/product");
     },
