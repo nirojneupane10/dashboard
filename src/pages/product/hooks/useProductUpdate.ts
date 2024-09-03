@@ -7,6 +7,8 @@ import { updateProduct } from "../../../api/productApi/productApi";
 import { ProductFormData } from "../types/ProductTypes";
 import { productSchema } from "../schema/productSchema";
 
+const PRODUCT_QUERY_KEY = "product";
+
 export const useUpdateProduct = (
   defaultValues: ProductFormData,
   id: string
@@ -24,7 +26,7 @@ export const useUpdateProduct = (
   const mutation = useMutation({
     mutationFn: (data: ProductFormData) => updateProduct(id, data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["product"] });
+      queryClient.invalidateQueries({ queryKey: [PRODUCT_QUERY_KEY] });
       toast.success(data.message);
     },
     onError: (error: AxiosError<{ message: string }>) => {

@@ -4,13 +4,15 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { deleteProduct } from "../../../api/productApi/productApi";
 
+const PRODUCT_QUERY_KEY = "product";
+
 export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["product"] });
+      queryClient.invalidateQueries({ queryKey: [PRODUCT_QUERY_KEY] });
       toast.success(data.message);
     },
     onError: (error: AxiosError<{ message: string }>) => {

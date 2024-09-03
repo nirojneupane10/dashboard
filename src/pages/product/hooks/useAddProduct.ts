@@ -9,6 +9,8 @@ import { addProduct } from "../../../api/productApi/productApi";
 import { ProductFormData } from "../types/ProductTypes";
 import { productSchema } from "../schema/productSchema";
 
+const PRODUCT_QUERY_KEY = "product";
+
 export const useProductForm = () => {
   const queryClient = useQueryClient();
   const {
@@ -23,7 +25,7 @@ export const useProductForm = () => {
   const mutation = useMutation({
     mutationFn: addProduct,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["product"] });
+      queryClient.invalidateQueries({ queryKey: [PRODUCT_QUERY_KEY] });
       toast.success(data.message);
       navigate("/product");
     },
