@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
+import Logout from "../logout/Logout";
 
 const sidebarItems = [
   { name: "Home", icon: <HomeIcon />, link: "/" },
@@ -30,6 +31,7 @@ const Sidebar = () => {
         },
       }}
     >
+      <Logout />
       <List>
         {sidebarItems.map((item, index) => (
           <ListItem
