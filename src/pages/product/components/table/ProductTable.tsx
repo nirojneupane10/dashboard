@@ -1,22 +1,26 @@
+import React from "react";
 import { MaterialReactTable } from "material-react-table";
-import { columns } from "./ProductColumn";
 import { useProduct } from "../../hooks/useGetProduct";
 import { Product } from "../../types/ProductTypes";
+import { useColumns } from "./ProductColumn";
 
 type ProductTableProps = {
   handleOpen: (product: Product) => void;
 };
 
-const ProductTable: React.FC<ProductTableProps> = ({ handleOpen }) => {
-  const { data } = useProduct();
+const ProductTable: React.FC<ProductTableProps> = React.memo(
+  ({ handleOpen }) => {
+    const { data } = useProduct();
+    const columns = useColumns(handleOpen);
 
-  return (
-    <MaterialReactTable
-      columns={columns(handleOpen)}
-      data={data ?? []}
-      enableRowSelection
-    />
-  );
-};
+    return (
+      <MaterialReactTable
+        columns={columns}
+        data={data ?? []}
+        enableRowSelection
+      />
+    );
+  }
+);
 
 export default ProductTable;
