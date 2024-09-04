@@ -1,11 +1,32 @@
+import React from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-
 import Loader from "../../../../components/loader/Loader";
-import { useProductForm } from "../../hooks/useAddProduct";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ProductFormData } from "../../types/ProductTypes";
+import { productSchema } from "../../schema/productSchema";
 
-const ProductForms = () => {
-  const { register, handleSubmit, errors, onSubmit, mutation } =
-    useProductForm();
+type ProductFormsProps = {
+  defaultValues?: ProductFormData;
+  onSubmit: (data: ProductFormData) => void;
+  isUpdating?: boolean;
+  isLoading?: boolean;
+};
+
+const ProductForms: React.FC<ProductFormsProps> = ({
+  defaultValues,
+  onSubmit,
+  isUpdating = false,
+  isLoading = false,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ProductFormData>({
+    resolver: zodResolver(productSchema),
+    defaultValues,
+  });
 
   return (
     <Box
@@ -15,7 +36,7 @@ const ProductForms = () => {
       justifyContent={"center"}
     >
       <Typography variant="h4" gutterBottom>
-        Product Form
+        {isUpdating ? "Update Product" : "Add Product"}
       </Typography>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2} width={500}>
@@ -48,9 +69,9 @@ const ProductForms = () => {
             helperText={errors.price?.message}
           />
           <TextField
-            label="Qauntity"
+            label="Quantity"
             type="number"
-            id="qunatity"
+            id="quantity"
             {...register("quantity", {
               valueAsNumber: true,
             })}
@@ -66,15 +87,17 @@ const ProductForms = () => {
             helperText={errors.brand?.message}
           />
           <Button type="submit" variant="contained">
-            {mutation.isPending ? (
+            {isLoading ? (
               <>
                 <Loader />
                 <Typography variant="body1" marginLeft={2}>
-                  Adding Product...
+                  {isUpdating ? "Updating Product..." : "Adding Product..."}
                 </Typography>
               </>
             ) : (
-              <Typography variant="body1">Add Product</Typography>
+              <Typography variant="body1">
+                {isUpdating ? "Update Product" : "Add Product"}
+              </Typography>
             )}
           </Button>
         </Stack>

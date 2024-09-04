@@ -1,9 +1,9 @@
 import { Dialog, DialogTitle, IconButton } from "@mui/material";
-
 import CloseIcon from "@mui/icons-material/Close";
 import { Product } from "../../types/ProductTypes";
-import UpdateProductForms from "../form/updateForm";
+
 import React from "react";
+import UpdateProductForms from "../form/UpdateProduct";
 
 type DialogBoxProps = {
   openDialog: boolean;
@@ -24,7 +24,7 @@ const DialogBox: React.FC<DialogBoxProps> = React.memo(
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <UpdateProductForms product={productData} />
+        {productData && <UpdateProductForms product={productData} />}
       </Dialog>
     );
   }

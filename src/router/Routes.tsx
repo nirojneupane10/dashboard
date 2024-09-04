@@ -10,7 +10,7 @@ import LazyLoad from "../components/LazyLoad";
 import NotFoundPage from "../pages/NotFoundPage";
 import LoginForms from "../components/forms/LoginForms";
 import ProtectedRoute from "./ProtectedRoutes";
-import ProductForms from "../pages/product/components/form/ProductForm";
+import AddProduct from "../pages/product/components/form/AddProduct";
 
 const HomePage = React.lazy(() => import("../pages/HomePage"));
 const AboutPage = React.lazy(() => import("../pages/AboutPage"));
@@ -27,7 +27,7 @@ const router = createBrowserRouter(
         <Route index element={LazyLoad(HomePage)} />
         <Route path="/about" element={LazyLoad(AboutPage)} />
         <Route path="/product" element={LazyLoad(Product)} />
-        <Route path="/addProduct" element={LazyLoad(ProductForms)} />
+        <Route path="/addProduct" element={LazyLoad(AddProduct)} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
