@@ -1,11 +1,11 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ProductTable from "./components/table/ProductTable";
 import { useDialog } from "./hooks/useDialog";
 import { useCallback } from "react";
-import Loader from "../../components/loader/Loader";
 import AddIcon from "@mui/icons-material/Add";
+import LazyLoad from "../../components/LazyLoad";
 
 const DialogBox = React.lazy(() => import("./components/dialog/DialogBox"));
 
@@ -39,13 +39,13 @@ const Product = () => {
         </Typography>
         <ProductTable handleOpen={handleOpen} />
 
-        <Suspense fallback={<Loader />}>
+        {LazyLoad(() => (
           <DialogBox
             openDialog={openDialog}
             productData={productData}
             handleClose={handleClose}
           />
-        </Suspense>
+        ))}
       </Box>
     </Box>
   );
