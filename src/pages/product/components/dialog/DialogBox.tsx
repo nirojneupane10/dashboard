@@ -1,4 +1,10 @@
-import { Dialog, DialogTitle, IconButton } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  IconButton,
+  DialogContent,
+  Box,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Product } from "../../types/ProductTypes";
 
@@ -10,21 +16,42 @@ type DialogBoxProps = {
   productData: Product | null;
   handleClose: () => void;
 };
+
 const DialogBox: React.FC<DialogBoxProps> = React.memo(
   ({ openDialog, productData, handleClose }) => {
     return (
-      <Dialog open={openDialog} onClose={handleClose}>
+      <Dialog
+        open={openDialog}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            width: "80%",
+            maxWidth: "800px",
+            height: "80%",
+            maxHeight: "650px",
+          },
+        }}
+      >
         <DialogTitle>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
           >
-            <CloseIcon />
-          </IconButton>
+            <span>Update Product</span>
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
         </DialogTitle>
-        {productData && <UpdateProductForms product={productData} />}
+        <DialogContent>
+          {productData && <UpdateProductForms product={productData} />}
+        </DialogContent>
       </Dialog>
     );
   }

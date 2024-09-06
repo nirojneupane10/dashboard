@@ -20,14 +20,17 @@ type ProductFormsProps = {
   isUpdating?: boolean;
   isLoading?: boolean;
 };
+
 const selectOption: SelectOptionType[] = [
   { value: "veg", label: "Veg" },
   { value: "non-veg", label: "Non-Veg" },
 ];
+
 const radioOptions: RadioOptionTypes[] = [
   { label: "Yes", value: true },
   { label: "No", value: false },
 ];
+
 const ProductForms: React.FC<ProductFormsProps> = ({
   defaultValues,
   onSubmit,
@@ -45,7 +48,7 @@ const ProductForms: React.FC<ProductFormsProps> = ({
   });
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+    <Box component="form" marginTop={2} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2} width={700}>
         <Box display={"flex"} gap={2} alignItems={"center"}>
           <InputTextField

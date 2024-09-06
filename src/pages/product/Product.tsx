@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ProductTable from "./components/table/ProductTable";
 import { useDialog } from "./hooks/useDialog";
@@ -23,6 +23,7 @@ const Product = () => {
         <Button
           startIcon={<AddIcon />}
           variant="contained"
+          sx={{ marginBottom: 2 }}
           onClick={handleClick}
         >
           Add product
@@ -34,9 +35,6 @@ const Product = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Typography variant="h4" gutterBottom>
-          Product Page
-        </Typography>
         <ProductTable handleOpen={handleOpen} />
 
         {LazyLoad(() => (

@@ -8,6 +8,9 @@ export type Product = {
   price: number;
   quantity: number;
   brand: string;
+  category: string;
+  isAvailable: boolean;
+  expireDate: Date;
   __v: number;
 };
 
