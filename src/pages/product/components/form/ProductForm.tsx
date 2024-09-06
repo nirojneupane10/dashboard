@@ -1,10 +1,26 @@
 import React from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Loader from "../../../../components/loader/Loader";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProductFormData } from "../../types/ProductTypes";
 import { productSchema } from "../../schema/productSchema";
+import dayjs, { Dayjs } from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import Select from "react-select";
+import { SelectOptionType } from "../../types/selectType";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
@@ -12,7 +28,10 @@ type ProductFormsProps = {
   isUpdating?: boolean;
   isLoading?: boolean;
 };
-
+const selectOption: SelectOptionType[] = [
+  { value: "veg", label: "Veg" },
+  { value: "non-veg", label: "Non-Veg" },
+];
 const ProductForms: React.FC<ProductFormsProps> = ({
   defaultValues,
   onSubmit,
@@ -22,6 +41,7 @@ const ProductForms: React.FC<ProductFormsProps> = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
@@ -43,13 +63,12 @@ const ProductForms: React.FC<ProductFormsProps> = ({
           <TextField
             label="Product Name"
             type="text"
-            id="Product Name"
-            autoComplete="Product Name"
-            autoFocus
+            id="name"
             {...register("name")}
-            error={!!errors.name}
-            helperText={errors.name?.message}
+            error={!!errors.desc}
+            helperText={errors.desc?.message}
           />
+
           <TextField
             label="Product Description"
             type="text"
@@ -86,6 +105,66 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             error={!!errors.brand}
             helperText={errors.brand?.message}
           />
+          <Controller
+            name="category"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Select
+                options={selectOption}
+                onChange={(selectedOption) => onChange(selectedOption?.value)}
+                value={selectOption.find((option) => option.value === value)}
+                placeholder="Select a category"
+                isClearable
+              />
+            )}
+          />
+          <FormControl component="fieldset">
+            <Typography variant="subtitle1">Available</Typography>
+            <Controller
+              name="isAvailable"
+              control={control}
+              defaultValue={true} // default value
+              render={({ field: { onChange, value } }) => (
+                <RadioGroup
+                  row
+                  value={value}
+                  onChange={(e) => onChange(e.target.value === "true")}
+                >
+                  <FormControlLabel
+                    value={true}
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value={false}
+                    control={<Radio />}
+                    label="No"
+                  />
+                </RadioGroup>
+              )}
+            />
+          </FormControl>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Controller
+              name="expireDate"
+              control={control}
+              defaultValue={dayjs()}
+              render={({ field: { onChange, value } }) => (
+                <DatePicker
+                  label="Expiry Date"
+                  value={value}
+                  onChange={(date: Dayjs | null) => onChange(date)}
+                  slotProps={{
+                    textField: {
+                      error: !!errors.expireDate,
+                      helperText: errors.expireDate?.message,
+                    },
+                  }}
+                />
+              )}
+            />
+          </LocalizationProvider>
+
           <Button type="submit" variant="contained">
             {isLoading ? (
               <>
