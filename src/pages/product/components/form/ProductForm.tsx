@@ -7,7 +7,6 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import Loader from "../../../../components/loader/Loader";
@@ -19,9 +18,10 @@ import dayjs, { Dayjs } from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import Select from "react-select";
 import { SelectOptionType } from "../../types/selectType";
 import InputTextField from "./FormField/InputTextField";
+import InputNumberField from "./FormField/InputNumberField";
+import SelectField from "./FormField/SelectField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
@@ -73,44 +73,31 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             register={register}
             errors={errors}
           />
-          <TextField
+          <InputNumberField
             label="Price"
-            type="number"
-            id="price"
-            {...register("price", {
-              valueAsNumber: true,
-            })}
-            error={!!errors.price}
-            helperText={errors.price?.message}
+            fieldName="price"
+            register={register}
+            errors={errors}
           />
-          <TextField
+          <InputNumberField
             label="Quantity"
-            type="number"
-            id="quantity"
-            {...register("quantity", {
-              valueAsNumber: true,
-            })}
-            error={!!errors.quantity}
-            helperText={errors.quantity?.message}
+            fieldName="quantity"
+            register={register}
+            errors={errors}
           />
+
           <InputTextField
             label="Brand"
             fieldName="brand"
             register={register}
             errors={errors}
           />
-          <Controller
+          <SelectField
             name="category"
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <Select
-                options={selectOption}
-                onChange={(selectedOption) => onChange(selectedOption?.value)}
-                value={selectOption.find((option) => option.value === value)}
-                placeholder="Select a category"
-                isClearable
-              />
-            )}
+            options={selectOption}
+            placeholder="Select a category"
+            isClearable
           />
           <FormControl component="fieldset">
             <Typography variant="subtitle1">Available</Typography>
