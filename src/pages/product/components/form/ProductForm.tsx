@@ -21,6 +21,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Select from "react-select";
 import { SelectOptionType } from "../../types/selectType";
+import InputTextField from "./FormField/InputTextField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
@@ -60,22 +61,17 @@ const ProductForms: React.FC<ProductFormsProps> = ({
       </Typography>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2} width={500}>
-          <TextField
+          <InputTextField
             label="Product Name"
-            type="text"
-            id="name"
-            {...register("name")}
-            error={!!errors.desc}
-            helperText={errors.desc?.message}
+            fieldName="name"
+            register={register}
+            errors={errors}
           />
-
-          <TextField
+          <InputTextField
             label="Product Description"
-            type="text"
-            id="description"
-            {...register("desc")}
-            error={!!errors.desc}
-            helperText={errors.desc?.message}
+            fieldName="desc"
+            register={register}
+            errors={errors}
           />
           <TextField
             label="Price"
@@ -97,13 +93,11 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             error={!!errors.quantity}
             helperText={errors.quantity?.message}
           />
-          <TextField
+          <InputTextField
             label="Brand"
-            type="text"
-            id="brand"
-            {...register("brand")}
-            error={!!errors.brand}
-            helperText={errors.brand?.message}
+            fieldName="brand"
+            register={register}
+            errors={errors}
           />
           <Controller
             name="category"
@@ -123,7 +117,7 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             <Controller
               name="isAvailable"
               control={control}
-              defaultValue={true} // default value
+              defaultValue={true}
               render={({ field: { onChange, value } }) => (
                 <RadioGroup
                   row
