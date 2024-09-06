@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import Loader from "../../../../components/loader/Loader";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +13,8 @@ import { SelectOptionType } from "../../types/selectType";
 import InputTextField from "./FormField/InputTextField";
 import InputNumberField from "./FormField/InputNumberField";
 import SelectField from "./FormField/SelectField";
+import { RadioOptionTypes } from "../../types/radioType";
+import RadioGroupField from "./FormField/RadioField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
@@ -32,6 +25,10 @@ type ProductFormsProps = {
 const selectOption: SelectOptionType[] = [
   { value: "veg", label: "Veg" },
   { value: "non-veg", label: "Non-Veg" },
+];
+const radioOptions: RadioOptionTypes[] = [
+  { label: "Yes", value: true },
+  { label: "No", value: false },
 ];
 const ProductForms: React.FC<ProductFormsProps> = ({
   defaultValues,
@@ -99,32 +96,12 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             placeholder="Select a category"
             isClearable
           />
-          <FormControl component="fieldset">
-            <Typography variant="subtitle1">Available</Typography>
-            <Controller
-              name="isAvailable"
-              control={control}
-              defaultValue={true}
-              render={({ field: { onChange, value } }) => (
-                <RadioGroup
-                  row
-                  value={value}
-                  onChange={(e) => onChange(e.target.value === "true")}
-                >
-                  <FormControlLabel
-                    value={true}
-                    control={<Radio />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value={false}
-                    control={<Radio />}
-                    label="No"
-                  />
-                </RadioGroup>
-              )}
-            />
-          </FormControl>
+          <RadioGroupField
+            name="isAvailable"
+            control={control}
+            label="Available"
+            options={radioOptions}
+          />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Controller
               name="expireDate"
