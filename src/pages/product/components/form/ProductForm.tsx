@@ -1,20 +1,18 @@
 import React from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Loader from "../../../../components/loader/Loader";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProductFormData } from "../../types/ProductTypes";
 import { productSchema } from "../../schema/productSchema";
-import dayjs, { Dayjs } from "dayjs";
-import { DatePicker } from "@mui/x-date-pickers";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 import { SelectOptionType } from "../../types/selectType";
 import InputTextField from "./FormField/InputTextField";
 import InputNumberField from "./FormField/InputNumberField";
 import SelectField from "./FormField/SelectField";
 import { RadioOptionTypes } from "../../types/radioType";
 import RadioGroupField from "./FormField/RadioField";
+import DatePickerField from "./FormField/DatePickerField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
@@ -102,26 +100,13 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             label="Available"
             options={radioOptions}
           />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Controller
-              name="expireDate"
-              control={control}
-              defaultValue={dayjs()}
-              render={({ field: { onChange, value } }) => (
-                <DatePicker
-                  label="Expiry Date"
-                  value={value}
-                  onChange={(date: Dayjs | null) => onChange(date)}
-                  slotProps={{
-                    textField: {
-                      error: !!errors.expireDate,
-                      helperText: errors.expireDate?.message,
-                    },
-                  }}
-                />
-              )}
-            />
-          </LocalizationProvider>
+          <DatePickerField
+            name="expireDate"
+            control={control}
+            label="Expiry Date"
+            defaultValue={dayjs()}
+            errors={errors}
+          />
 
           <Button type="submit" variant="contained">
             {isLoading ? (
