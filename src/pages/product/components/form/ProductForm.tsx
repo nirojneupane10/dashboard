@@ -45,17 +45,9 @@ const ProductForms: React.FC<ProductFormsProps> = ({
   });
 
   return (
-    <Box
-      display="flex"
-      flexDirection={"column"}
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      <Typography variant="h4" gutterBottom>
-        {isUpdating ? "Update Product" : "Add Product"}
-      </Typography>
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2} width={500}>
+    <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={2} width={700}>
+        <Box display={"flex"} gap={2} alignItems={"center"}>
           <InputTextField
             label="Product Name"
             fieldName="name"
@@ -63,11 +55,13 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             errors={errors}
           />
           <InputTextField
-            label="Product Description"
-            fieldName="desc"
+            label="Brand"
+            fieldName="brand"
             register={register}
             errors={errors}
           />
+        </Box>
+        <Box display={"flex"} gap={2} alignItems={"center"}>
           <InputNumberField
             label="Price"
             fieldName="price"
@@ -80,35 +74,39 @@ const ProductForms: React.FC<ProductFormsProps> = ({
             register={register}
             errors={errors}
           />
-
-          <InputTextField
-            label="Brand"
-            fieldName="brand"
-            register={register}
-            errors={errors}
-          />
-          <SelectField
-            name="category"
-            control={control}
-            options={selectOption}
-            placeholder="Select a category"
-            isClearable
-          />
-          <RadioGroupField
-            name="isAvailable"
-            control={control}
-            label="Available"
-            options={radioOptions}
-          />
-          <DatePickerField
-            name="expireDate"
-            control={control}
-            label="Expiry Date"
-            defaultValue={dayjs()}
-            errors={errors}
-          />
-
-          <Button type="submit" variant="contained">
+        </Box>
+        <InputTextField
+          label="Product Description"
+          fieldName="desc"
+          register={register}
+          errors={errors}
+        />
+        <RadioGroupField
+          name="isAvailable"
+          control={control}
+          label="Available"
+          options={radioOptions}
+        />
+        <SelectField
+          name="category"
+          control={control}
+          options={selectOption}
+          placeholder="Select a category"
+          isClearable
+        />
+        <DatePickerField
+          name="expireDate"
+          control={control}
+          label="Expiry Date"
+          defaultValue={dayjs()}
+          errors={errors}
+        />
+        <Box display={"flex"} justifyContent={"center"}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ width: 200, alignItems: "center" }}
+          >
             {isLoading ? (
               <>
                 <Loader />
@@ -122,8 +120,8 @@ const ProductForms: React.FC<ProductFormsProps> = ({
               </Typography>
             )}
           </Button>
-        </Stack>
-      </Box>
+        </Box>
+      </Stack>
     </Box>
   );
 };

@@ -5,7 +5,7 @@ const SidebarLayout = () => {
   return (
     <>
       <Sidebar />
-      <main>
+      <main style={{ marginLeft: 250 }}>
         <Outlet />
       </main>
     </>
