@@ -1,7 +1,7 @@
 import { ProductFormData } from "../../pages/product/types/ProductTypes";
 import axiosIntance from "../axiosInstance";
 
-//Route 1: Get all the product
+//Route 1: Get all the products
 export const getProduct = async () => {
   const response = await axiosIntance.get("/product");
 
