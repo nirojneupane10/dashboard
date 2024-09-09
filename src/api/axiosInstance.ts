@@ -9,4 +9,24 @@ const axiosInstance = axios.create({
   },
 });
 
+axios.interceptors.request.use(
+  (request) => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      request.headers.Authorization = `Bearer ${token}`;
+    }
+    return request;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export default axiosInstance;
