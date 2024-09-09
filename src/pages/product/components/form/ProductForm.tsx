@@ -1,18 +1,18 @@
 import React from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import Loader from "../../../../components/loader/Loader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductFormData } from "../../../../types/productTypes";
-import { productSchema } from "../../../../validation/productSchema";
 import dayjs from "dayjs";
-import { SelectOptionType } from "../../../../types/selectFieldType";
-import { RadioOptionTypes } from "../../../../types/radioFieldType";
-import InputTextField from "../../../../components/forms/FormField/InputTextField";
-import InputNumberField from "../../../../components/forms/FormField/InputNumberField";
-import RadioGroupField from "../../../../components/forms/FormField/RadioField";
-import SelectField from "../../../../components/forms/FormField/SelectField";
-import DatePickerField from "../../../../components/forms/FormField/DatePickerField";
+import Loader from "@components/loader/Loader";
+import InputTextField from "@components/forms/FormField/InputTextField";
+import RadioGroupField from "@components/forms/FormField/RadioField";
+import SelectField from "@components/forms/FormField/SelectField";
+import DatePickerField from "@components/forms/FormField/DatePickerField";
+import { productSchema } from "@validation/productSchema";
+import { SelectOptionType } from "types/selectFieldType";
+import { RadioOptionTypes } from "types/radioFieldType";
+import { ProductFormData } from "types/productTypes";
+import InputNumberField from "@components/forms/FormField/InputNumberField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
