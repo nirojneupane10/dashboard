@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData } from "../types/loginFormTypes";
-import { loginSchema } from "../schames/loginSchemas";
+import { loginSchema } from "../validation/loginSchemas";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { Product } from "../types/ProductTypes";
+import { Product } from "../../../types/productTypes";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import { Delete } from "@mui/icons-material";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { MaterialReactTable } from "material-react-table";
 import { useProduct } from "../../hooks/useGetProduct";
-import { Product } from "../../types/ProductTypes";
+import { Product } from "../../../../types/productTypes";
 import { useColumns } from "./ProductColumn";
 
 type ProductTableProps = {

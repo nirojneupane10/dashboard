@@ -6,7 +6,7 @@ import {
   Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Product } from "../../types/ProductTypes";
+import { Product } from "../../../../types/productTypes";
 
 import React from "react";
 import UpdateProductForms from "../form/UpdateProduct";

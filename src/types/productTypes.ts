@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { productSchema } from "../schema/productSchema";
+import { productSchema } from "../validation/productSchema";
 
 export type Product = {
   _id: string;

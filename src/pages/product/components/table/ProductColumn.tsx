@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { MRT_ColumnDef } from "material-react-table";
-import { Product } from "../../types/ProductTypes";
+import { Product } from "../../../../types/productTypes";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 import { ActionButtons } from "../../shared/ActionButton";
 import dayjs from "dayjs";

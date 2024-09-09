@@ -1,5 +1,5 @@
 import { useUpdateProduct } from "../../hooks/useProductUpdate";
-import { Product } from "../../types/ProductTypes";
+import { Product } from "../../../../types/productTypes";
 import ProductForms from "./ProductForm";
 import dayjs from "dayjs";
 
