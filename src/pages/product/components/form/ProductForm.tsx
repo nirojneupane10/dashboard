@@ -8,11 +8,11 @@ import { productSchema } from "../../schema/productSchema";
 import dayjs from "dayjs";
 import { SelectOptionType } from "../../types/selectType";
 import { RadioOptionTypes } from "../../types/radioType";
-import InputTextField from "../../../../components/forms/InputTextField";
-import InputNumberField from "../../../../components/forms/InputNumberField";
-import RadioGroupField from "../../../../components/forms/RadioField";
-import SelectField from "../../../../components/forms/SelectField";
-import DatePickerField from "../../../../components/forms/DatePickerField";
+import InputTextField from "../../../../components/forms/FormField/InputTextField";
+import InputNumberField from "../../../../components/forms/FormField/InputNumberField";
+import RadioGroupField from "../../../../components/forms/FormField/RadioField";
+import SelectField from "../../../../components/forms/FormField/SelectField";
+import DatePickerField from "../../../../components/forms/FormField/DatePickerField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;

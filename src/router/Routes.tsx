@@ -8,7 +8,7 @@ import {
 import SidebarLayout from "../components/layout/SidebarLayout";
 import LazyLoad from "../components/LazyLoad";
 import NotFoundPage from "../pages/NotFoundPage";
-import LoginForms from "../components/forms/LoginForms";
+import LoginForms from "../components/forms/auth/LoginForms";
 import ProtectedRoute from "./ProtectedRoutes";
 
 const HomePage = React.lazy(() => import("../pages/HomePage"));
