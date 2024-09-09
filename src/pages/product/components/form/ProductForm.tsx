@@ -1,10 +1,18 @@
 import React from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import Loader from "../../../../components/loader/Loader";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductFormData } from "../../types/ProductTypes";
-import { productSchema } from "../../schema/productSchema";
+import dayjs from "dayjs";
+import Loader from "@components/loader/Loader";
+import InputTextField from "@components/forms/FormField/InputTextField";
+import RadioGroupField from "@components/forms/FormField/RadioField";
+import SelectField from "@components/forms/FormField/SelectField";
+import DatePickerField from "@components/forms/FormField/DatePickerField";
+import { productSchema } from "@validation/productSchema";
+import { SelectOptionType } from "types/selectFieldType";
+import { RadioOptionTypes } from "types/radioFieldType";
+import { ProductFormData } from "types/productTypes";
+import InputNumberField from "@components/forms/FormField/InputNumberField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
@@ -12,6 +20,16 @@ type ProductFormsProps = {
   isUpdating?: boolean;
   isLoading?: boolean;
 };
+
+const selectOption: SelectOptionType[] = [
+  { value: "veg", label: "Veg" },
+  { value: "non-veg", label: "Non-Veg" },
+];
+
+const radioOptions: RadioOptionTypes[] = [
+  { label: "Yes", value: true },
+  { label: "No", value: false },
+];
 
 const ProductForms: React.FC<ProductFormsProps> = ({
   defaultValues,
@@ -22,6 +40,7 @@ const ProductForms: React.FC<ProductFormsProps> = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
@@ -29,64 +48,68 @@ const ProductForms: React.FC<ProductFormsProps> = ({
   });
 
   return (
-    <Box
-      display="flex"
-      flexDirection={"column"}
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      <Typography variant="h4" gutterBottom>
-        {isUpdating ? "Update Product" : "Add Product"}
-      </Typography>
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2} width={500}>
-          <TextField
+    <Box component="form" marginTop={2} onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={2} width={700}>
+        <Box display={"flex"} gap={2} alignItems={"center"}>
+          <InputTextField
             label="Product Name"
-            type="text"
-            id="Product Name"
-            autoComplete="Product Name"
-            autoFocus
-            {...register("name")}
-            error={!!errors.name}
-            helperText={errors.name?.message}
+            fieldName="name"
+            register={register}
+            errors={errors}
           />
-          <TextField
-            label="Product Description"
-            type="text"
-            id="description"
-            {...register("desc")}
-            error={!!errors.desc}
-            helperText={errors.desc?.message}
-          />
-          <TextField
-            label="Price"
-            type="number"
-            id="price"
-            {...register("price", {
-              valueAsNumber: true,
-            })}
-            error={!!errors.price}
-            helperText={errors.price?.message}
-          />
-          <TextField
-            label="Quantity"
-            type="number"
-            id="quantity"
-            {...register("quantity", {
-              valueAsNumber: true,
-            })}
-            error={!!errors.quantity}
-            helperText={errors.quantity?.message}
-          />
-          <TextField
+          <InputTextField
             label="Brand"
-            type="text"
-            id="brand"
-            {...register("brand")}
-            error={!!errors.brand}
-            helperText={errors.brand?.message}
+            fieldName="brand"
+            register={register}
+            errors={errors}
           />
-          <Button type="submit" variant="contained">
+        </Box>
+        <Box display={"flex"} gap={2} alignItems={"center"}>
+          <InputNumberField
+            label="Price"
+            fieldName="price"
+            register={register}
+            errors={errors}
+          />
+          <InputNumberField
+            label="Quantity"
+            fieldName="quantity"
+            register={register}
+            errors={errors}
+          />
+        </Box>
+        <InputTextField
+          label="Product Description"
+          fieldName="desc"
+          register={register}
+          errors={errors}
+        />
+        <RadioGroupField
+          name="isAvailable"
+          control={control}
+          label="Available"
+          options={radioOptions}
+        />
+        <SelectField
+          name="category"
+          control={control}
+          options={selectOption}
+          placeholder="Select a category"
+          isClearable
+        />
+        <DatePickerField
+          name="expireDate"
+          control={control}
+          label="Expiry Date"
+          defaultValue={dayjs()}
+          errors={errors}
+        />
+        <Box display={"flex"} justifyContent={"center"}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ width: 200, alignItems: "center" }}
+          >
             {isLoading ? (
               <>
                 <Loader />
@@ -100,8 +123,8 @@ const ProductForms: React.FC<ProductFormsProps> = ({
               </Typography>
             )}
           </Button>
-        </Stack>
-      </Box>
+        </Box>
+      </Stack>
     </Box>
   );
 };

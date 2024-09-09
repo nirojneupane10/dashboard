@@ -4,8 +4,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { updateProduct } from "../../../api/productApi/productApi";
-import { ProductFormData } from "../types/ProductTypes";
-import { productSchema } from "../schema/productSchema";
+import { ProductFormData } from "../../../types/productTypes";
+import { productSchema } from "../../../validation/productSchema";
 import { queryKeys } from "../../../keys/keys";
 
 export const useUpdateProduct = (

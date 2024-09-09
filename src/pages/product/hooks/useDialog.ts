@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Product } from "../types/ProductTypes";
+import { Product } from "../../../types/productTypes";
 
 export const useDialog = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { productSchema } from "../schema/productSchema";
+import { productSchema } from "../validation/productSchema";
 
 export type Product = {
   _id: string;
@@ -8,6 +8,9 @@ export type Product = {
   price: number;
   quantity: number;
   brand: string;
+  category: string;
+  isAvailable: boolean;
+  expireDate: Date;
   __v: number;
 };
 

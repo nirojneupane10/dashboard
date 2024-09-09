@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../../config/config";
-import { ProductFormData } from "../../pages/product/types/ProductTypes";
+import { ProductFormData } from "../../types/productTypes";
 
 //Route 1: Get all the product
 export const getProduct = async () => {
