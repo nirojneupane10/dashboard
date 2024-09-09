@@ -1,26 +1,31 @@
 import React, { useState, ReactNode, useEffect } from "react";
 import AuthContext from "./AuthContext";
+import {
+  getItemLocalStorage,
+  removeItemlocalStorage,
+  setItemLocalStorage,
+} from "../../utlis/storageUtlis";
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = getItemLocalStorage("accessToken");
     return !!token;
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = getItemLocalStorage("accessToken");
     setIsAuthenticated(!!token);
   }, []);
 
   const login = (token: string) => {
-    localStorage.setItem("accessToken", token);
+    setItemLocalStorage("accessToken", token);
     setIsAuthenticated(true);
   };
   const logout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem("accessToken");
+    removeItemlocalStorage("accessToken");
   };
 
   return (
