@@ -7,12 +7,12 @@ import { ProductFormData } from "../../types/ProductTypes";
 import { productSchema } from "../../schema/productSchema";
 import dayjs from "dayjs";
 import { SelectOptionType } from "../../types/selectType";
-import InputTextField from "./FormField/InputTextField";
-import InputNumberField from "./FormField/InputNumberField";
-import SelectField from "./FormField/SelectField";
 import { RadioOptionTypes } from "../../types/radioType";
-import RadioGroupField from "./FormField/RadioField";
-import DatePickerField from "./FormField/DatePickerField";
+import InputTextField from "../../../../components/forms/InputTextField";
+import InputNumberField from "../../../../components/forms/InputNumberField";
+import RadioGroupField from "../../../../components/forms/RadioField";
+import SelectField from "../../../../components/forms/SelectField";
+import DatePickerField from "../../../../components/forms/DatePickerField";
 
 type ProductFormsProps = {
   defaultValues?: ProductFormData;
