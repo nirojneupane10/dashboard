@@ -1,42 +1,35 @@
-import axios from "axios";
-import config from "../../config/config";
 import { ProductFormData } from "../../pages/product/types/ProductTypes";
+import axiosIntance from "../axiosInstance";
 
-//Route 1: Get all the product
+//Route 1: Get all the products
 export const getProduct = async () => {
-  const response = await axios.get(`${config.productURL}/product`);
+  const response = await axiosIntance.get("/product");
 
   return response.data;
 };
 
 //Route 2: Display single product
 export const getSingleProduct = async (id: number) => {
-  const response = await axios.get(`${config.productURL}/product/${id}`);
+  const response = await axiosIntance.get(`/product/${id}`);
 
   return response.data;
 };
 
 //Route 3: Add product
 export const addProduct = async (productData: ProductFormData) => {
-  const response = await axios.post(
-    `${config.productURL}/product`,
-    productData
-  );
+  const response = await axiosIntance.post(`/product`, productData);
 
   return response.data;
 };
 
 //Route 4: Delete product
 export const deleteProduct = async (id: string) => {
-  const response = await axios.delete(`${config.productURL}/product/${id}`);
+  const response = await axiosIntance.delete(`product/${id}`);
   return response.data;
 };
 
 //Route 5: Update product
 export const updateProduct = async (id: string, data: ProductFormData) => {
-  const response = await axios.patch(
-    `${config.productURL}/product/${id}`,
-    data
-  );
+  const response = await axiosIntance.patch(`/product/${id}`, data);
   return response.data;
 };
